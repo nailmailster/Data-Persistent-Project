@@ -51,7 +51,8 @@ public class HighScoreManager : MonoBehaviour
         // private string championName;
         // private int highscore;
         // private string playerName;
-        //  Unity cannot serialize properties?
+
+        //  Unity doesn't serialize properties?
         //  So I made values public
         public string championName;
         public int highscore;

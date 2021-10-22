@@ -12,7 +12,9 @@ public class MainManager : MonoBehaviour
 
     public Text ScoreText;
     public GameObject GameOverText;
+    //  added code start
     [SerializeField] Text scoreText1;
+    //  added code end
     
     private bool m_Started = false;
     private int m_Points;
@@ -60,10 +62,12 @@ public class MainManager : MonoBehaviour
             {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             }
+            //  added code start
             else if (Input.GetKeyDown(KeyCode.Escape))
             {
                 SceneManager.LoadScene(0);
             }
+            //  added code end
         }
     }
 
@@ -78,6 +82,7 @@ public class MainManager : MonoBehaviour
         m_GameOver = true;
         GameOverText.SetActive(true);
 
+        //  added code start
         if (HighScoreManager.Instance != null)
         {
             if (m_Points > HighScoreManager.Instance.ChampionScore)
@@ -87,8 +92,10 @@ public class MainManager : MonoBehaviour
             }
             HighScoreManager.Instance.SaveHighScoreAndPlayer(m_Points);
         }
+        //  added code end
     }
 
+    //  added code start
     private void OnGUI()
     {
         if (HighScoreManager.Instance != null)
@@ -96,4 +103,5 @@ public class MainManager : MonoBehaviour
                             + HighScoreManager.Instance.ChampionName
                             + " : " + HighScoreManager.Instance.ChampionScore;
     }
+    //  added code end
 }
