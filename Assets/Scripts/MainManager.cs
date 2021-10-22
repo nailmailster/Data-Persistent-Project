@@ -12,6 +12,7 @@ public class MainManager : MonoBehaviour
 
     public Text ScoreText;
     public GameObject GameOverText;
+    [SerializeField] Text scoreText1;
     
     private bool m_Started = false;
     private int m_Points;
@@ -59,6 +60,10 @@ public class MainManager : MonoBehaviour
             {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             }
+            else if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                SceneManager.LoadScene(0);
+            }
         }
     }
 
@@ -72,5 +77,23 @@ public class MainManager : MonoBehaviour
     {
         m_GameOver = true;
         GameOverText.SetActive(true);
+
+        if (HighScoreManager.Instance != null)
+        {
+            if (m_Points > HighScoreManager.Instance.ChampionScore)
+            {
+                HighScoreManager.Instance.ChampionScore = m_Points;
+                HighScoreManager.Instance.ChampionName = HighScoreManager.Instance.PlayerName;
+            }
+            HighScoreManager.Instance.SaveHighScoreAndPlayer(m_Points);
+        }
+    }
+
+    private void OnGUI()
+    {
+        if (HighScoreManager.Instance != null)
+            scoreText1.text = "Best Score : "
+                            + HighScoreManager.Instance.ChampionName
+                            + " : " + HighScoreManager.Instance.ChampionScore;
     }
 }
